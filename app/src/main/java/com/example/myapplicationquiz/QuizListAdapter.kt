@@ -6,7 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplicationquiz.databinding.QuizItemRecyclerRowBinding
 
-class QuizListAdapter(private val quizList: List<QuizModel>) :
+class QuizListAdapter(
+    private val quizList: List<QuizModel>,
+    private val onEditQuiz: (QuizModel) -> Unit,
+    private val onDeleteQuiz: (QuizModel) -> Unit
+) :
     RecyclerView.Adapter<QuizListAdapter.MyViewHolder>() {
 
     class MyViewHolder(private val binding: QuizItemRecyclerRowBinding) :
@@ -34,15 +38,26 @@ class QuizListAdapter(private val quizList: List<QuizModel>) :
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-
-        holder.bind(quizList[position])
-
+        val quiz = quizList[position]
+        holder.bind(quiz)
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, QuizActivity::class.java)
-
-            intent.putExtra("QUIZ_ID", quizList[position].id)
+            intent.putExtra("QUIZ_ID", quiz.id)
             holder.itemView.context.startActivity(intent)
+        }
+
+        holder.itemView.setOnLongClickListener {
+            androidx.appcompat.app.AlertDialog.Builder(holder.itemView.context)
+                .setTitle(quiz.title)
+                .setItems(arrayOf("Editar", "Excluir")) { _, which ->
+                    when (which) {
+                        0 -> onEditQuiz(quiz)
+                        1 -> onDeleteQuiz(quiz)
+                    }
+                }
+                .show()
+            true
         }
     }
 }

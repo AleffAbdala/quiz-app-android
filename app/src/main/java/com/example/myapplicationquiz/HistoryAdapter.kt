@@ -26,7 +26,9 @@ class HistoryAdapter(private val resultList: List<QuizResultModel>) :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val result = resultList[position]
         holder.titleText.text = result.title
-        holder.scoreText.text = "Pontuação: ${result.score}/${result.totalQuestions}"
+        val percentage = if (result.totalQuestions == 0) 0 else (result.score * 100) / result.totalQuestions
+        holder.scoreText.text =
+            "Pontuação: ${result.score}/${result.totalQuestions} (${percentage}%) - ${result.elapsedSeconds}s"
 
         val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
         holder.dateText.text = "Data: ${sdf.format(Date(result.timestamp))}"

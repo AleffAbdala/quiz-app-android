@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -27,13 +28,16 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         viewBinding = true
     }
@@ -41,21 +45,30 @@ android {
 
 dependencies {
 
+    // Core Android
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    // CORREÇÃO:
-    // 1. Declare a plataforma da BoM primeiro.
+    // Firebase (BoM)
     implementation(platform(libs.firebase.bom))
-
-    // 2. Adicione as bibliotecas do Firebase que você precisa (sem duplicatas).
     implementation(libs.firebase.auth.ktx)
     implementation(libs.firebase.database.ktx)
 
-    // Dependências de teste
+    // ROOM (com KSP)
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    // Lifecycle (necessário para lifecycleScope)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.0")
+
+    // Testes
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

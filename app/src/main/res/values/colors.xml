@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
+    <color name="black">#102A43</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="gray">#BFBDBD</color>
-    <color name="orange">#EB6B2A</color>
-    <color name="blue">#2196F3</color>
-    <color name="red">#FF0000</color>
+    <color name="gray">#D9E2EC</color>
+    <color name="orange">#F46B3F</color>
+    <color name="blue">#1F6FEB</color>
+    <color name="red">#D64545</color>
 
+    <color name="surface">#F8FAFC</color>
+    <color name="surface_alt">#EEF4FF</color>
+    <color name="stroke">#CBD5E1</color>
+    <color name="text_secondary">#486581</color>
 </resources>
