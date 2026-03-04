@@ -1,6 +1,8 @@
 [versions]
 agp = "8.12.0"
 kotlin = "2.0.21"
+ksp = "2.0.21-1.0.25"
+
 coreKtx = "1.10.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
@@ -10,8 +12,9 @@ material = "1.10.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
 googleGmsGoogleServices = "4.4.3"
-# Adiciona a versão da Firebase BoM
+
 firebaseBom = "33.1.0"
+room = "2.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -23,15 +26,18 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
-# Declaração da Firebase BoM
+# Firebase
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
-
-# Dependências do Firebase (sem versão, pois a BoM cuida disso)
 firebase-auth-ktx = { module = "com.google.firebase:firebase-auth-ktx" }
 firebase-database-ktx = { module = "com.google.firebase:firebase-database-ktx" }
 
+# Room
+room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
